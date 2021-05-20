@@ -1,0 +1,93 @@
+.projectBox :global(.ant-tabs-content-holder) {
+  overflow: auto;
+}
+
+.formBtn {
+  width: 310px;
+  height: 38px;
+  background-color: #1c94f4;
+  border-radius: 6px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+/* .leaveTap :global(.ant-tabs-content-holder) {
+  padding: 0 140px;
+} */
+
+.tabPane1,
+.tabPane3,
+.tabPane4 {
+  padding: 16px 20px 0 20px !important;
+}
+
+.projectBox :global(.ant-tabs-nav) {
+  margin: 0 !important;
+}
+
+.DrawerBox {
+  display: flex;
+  align-items: center;
+}
+.DrawerText {
+  display: flex;
+  flex-direction: column;
+}
+.DrawerAvatar {
+  width: 36px;
+  height: 36px;
+  margin-right: 12px;
+}
+.DrawerTitle {
+  display: flex;
+}
+
+:global(.ant-timeline-item-content) {
+  display: flex;
+  justify-content: space-between;
+}
+
+.document {
+  height: 100%;
+  display: flex;
+}
+
+.documentLeft {
+  flex-basis: 160px;
+  overflow: auto;
+}
+.documentLeft .documentList {
+  width: 160px;
+  height: 38px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 16px;
+  cursor: pointer;
+}
+.documentLeft .documentList:hover {
+  background-color: #f2f4f5;
+}
+.documentLeft .documentList img {
+  margin-right: 6px;
+  width: 10px !important;
+  height: 12px !important;
+}
+.documentLeft .documentList .documentText {
+  line-height: 38px;
+  color: #333;
+}
+
+.documentLine {
+  width: 1px;
+  height: 100%;
+  background-color: #dee0e3;
+  position: relative;
+  left: 1px;
+  z-index: 99999;
+}
+
+.documentRight {
+  width: 90%;
+}
+

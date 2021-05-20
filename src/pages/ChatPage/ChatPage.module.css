@@ -1,0 +1,90 @@
+.ChatPageBox {
+  height: 100%;
+  display: flex;
+}
+
+.left {
+  flex-basis: 300px;
+  border-right: 1px solid #dee0e3;
+}
+.left .search {
+  margin: 12px 0 24px 0;
+}
+
+.left .list {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px 0 16px;
+}
+.left .list:hover {
+  background-color: #fafafa;
+  cursor: default;
+}
+
+.chatPageShow {
+  background-color: #eff0f1;
+}
+
+.left .list .avatar {
+  flex-basis: 32px;
+  height: 32px;
+}
+.left .list .data {
+  text-align: left;
+  padding-left: 10px;
+  flex: 2;
+}
+.left .list .time {
+  font-size: 12px;
+  color: #999999;
+  align-self: baseline;
+  margin-top: 12px;
+  text-align: right;
+  flex: 1;
+}
+
+.ChatPageBox :global(.ant-tree-list-scrollbar-thumb) {
+  background-color: #ececec !important;
+}
+
+.ChatPageBox :global(.ant-input-affix-wrapper) {
+  width: 270px;
+  height: 32px;
+  border-radius: 50px !important;
+  color: #666;
+}
+
+.ChatPageBox :global(.none) {
+  display: none;
+}
+.ChatPageBox :global(.block) {
+  display: block;
+}
+
+.ChatPageBox :global(.ant-tree) {
+  padding-right: 20px;
+  margin-left: 10px;
+}
+
+.ChatPageBox :global(.ant-tree .ant-tree-treenode) {
+  height: 32px;
+  align-items: center;
+}
+
+.ChatPageBox :global(.ant-tree-switcher) {
+  line-height: 32px;
+  text-align: right;
+  padding-right: 2px;
+}
+
+.ChatPageBox :global(.ant-tree-node-selected) {
+  background-color: #eff0f1 !important;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+}

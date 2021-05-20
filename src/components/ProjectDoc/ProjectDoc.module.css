@@ -1,0 +1,24 @@
+.ProjectDocBox :global(.ant-input) {
+  padding-left: 18px;
+  width: 88% !important;
+}
+
+.toolbar {
+  border-top: 1px solid #f0f0f0;
+  /* border: none; */
+}
+.text {
+  /* border: 1px solid #ccc;
+  min-height: 400px; */
+  border: none;
+  padding: 0 10px;
+}
+
+.icon > img{
+  width: 16px;
+  height: 16px;
+}
+
+.ProjectDocBox :global(.toolbarHidden) {
+  display: none !important;
+}

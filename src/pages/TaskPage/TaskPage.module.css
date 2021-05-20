@@ -1,0 +1,56 @@
+.taskPageBox {
+  height: 100%;
+  display: flex;
+  text-align: left;
+}
+
+.left {
+  flex-basis: 240px;
+  border-right: 1px solid #dee0e3;
+}
+
+.left .addProject {
+  width: 176px;
+  height: 30px;
+  background-color: #1890ff;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  margin: 12px 32px;
+}
+
+.left .list {
+  height: 60px;
+}
+
+.left .list .title {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 20px 0 20px;
+}
+
+.left .list .rate {
+  padding: 0 20px;
+}
+
+.taskPageBox :global(.taskShow) {
+  background-color: #eff0f1 !important;
+}
+
+.list:hover {
+  background-color: #fafafa;
+}
+
+.right {
+  flex: 1;
+  /* width: calc(100% - 200px); */
+  /* padding: 0 24px; */
+}
+
+.taskPageBox :global(.ant-divider-horizontal) {
+  margin: 0;
+}
+
+.taskPageBox :global(.ant-tabs-nav-wrap) {
+  margin-left: 24px !important;
+}

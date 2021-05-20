@@ -1,0 +1,183 @@
+.chatBox {
+  text-align: left;
+  width: 100%;
+  position: relative;
+  -webkit-user-select: none;
+}
+
+.top {
+  height: 70px;
+  line-height: 70px;
+  border-bottom: 1px solid #dee0e3;
+}
+
+.chat {
+  margin-top: 20px;
+  overflow: auto;
+}
+
+.item {
+  margin-bottom: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+}
+
+.itemAvata {
+  margin: 0 10px 0 24px;
+  overflow: hidden;
+}
+
+.itemText {
+  background-color: #f5f6f7;
+  border-radius: 4px;
+  padding: 12px;
+  max-width: 60%;
+  overflow: hidden;
+}
+
+.itemFile {
+  font-size: 12px;
+  background-color: #f5f6f7;
+  border-radius: 4px;
+  padding: 12px;
+  float: left;
+  max-width: 60%;
+}
+
+.itemFileCard {
+  background-color: #f5f6f7;
+  border-radius: 4px;
+  padding: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+}
+
+.fileMsgText {
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fileImg {
+  height: 40px;
+  display: block;
+}
+
+.fileMsg {
+  margin-left: 10px;
+}
+
+.auditCard {
+  width: 260px;
+  border: 1px solid #dee0e3;
+  border-radius: 4px;
+  padding: 12px 12px 0 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.auditCard hr {
+  width: 240px;
+  border: none;
+  height: 1px;
+  background-color: #f6f7f9;
+}
+
+.auditCard .content {
+  font-size: 13px;
+  padding: 8px 12px 0 12px;
+}
+
+.auditCard .content div {
+  margin-bottom: 8px;
+}
+
+.auditCard .footer {
+  display: flex;
+  justify-content: space-around;
+}
+.auditCard .footer .footerHr {
+  width: 1px;
+  height: 20px;
+  background: #f6f7f9;
+}
+.auditCard .footer .footerNo {
+  height: 30px;
+  width: 110px;
+  text-align: center;
+  cursor: pointer;
+}
+.auditCard .footer .footerYes {
+  height: 30px;
+  width: 110px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.dialogue {
+  width: 100%;
+  position: absolute;
+  bottom: 23px;
+  right: 0;
+}
+
+.emojiBox {
+  background: #fff;
+  height: 36px;
+  line-height: 36px;
+  border-top: 1px solid #dee0e3;
+  z-index: 99999;
+}
+
+.bottom {
+  width: 100%;
+  border: none;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #f6f7f9;
+}
+
+.DrawerContent {
+  padding-left: 12px;
+}
+.DrawerLine {
+  padding-left: 12px;
+  padding-top: 16px;
+  margin-bottom: -40px;
+}
+.DrawerEstimate {
+  padding-left: 12px;
+}
+
+/* emoji */
+
+/* 隐藏搜索框 */
+:global(.emoji-mart-search) {
+  display: none;
+}
+/* 隐藏解释框 */
+:global(.emoji-mart-preview) {
+  display: none;
+}
+/* 隐藏标题 */
+:global(.emoji-mart-category-label) {
+  display: none;
+}
+
+.emoji_container {
+  margin-left: 12px;
+  position: absolute;
+  bottom: 120px;
+  left: -13px;
+  /* z-index: 999; */
+}
+
+.chatBox :global(.ant-input:focus) {
+  box-shadow: none
+}

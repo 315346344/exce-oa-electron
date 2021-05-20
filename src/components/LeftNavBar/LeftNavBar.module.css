@@ -1,0 +1,55 @@
+.side {
+  flex-basis: 60px;
+  height: 100%;
+  text-align: center;
+  background-color: #3d4761;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-app-region: drag;
+}
+
+.side > .avatar {
+  width: 40px;
+  height: 40px;
+  margin: 36px 10px 24px 10px;
+}
+
+.itemArr {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemArr .item {
+  width: 60px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-app-region: no-drag;
+}
+
+.item:hover {
+  background-color: #3974ff;
+}
+
+:global(.icon) {
+  width: 20px;
+  height: 20px;
+  /* vertical-align: -0.15em; */
+  fill: #9198a9;
+  overflow: hidden;
+}
+
+:global(.show) {
+  fill: #fff;
+  background-color: #3974ff;
+}
+
+.item:hover :global(.icon) {
+  fill: #fff;
+}
+
+/* :global(.side) {
+  -webkit-app-region: no-drag;
+} */

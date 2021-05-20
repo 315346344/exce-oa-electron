@@ -1,0 +1,73 @@
+.AddressListPageBox {
+  height: 100%;
+  display: flex;
+}
+
+.left {
+  flex-basis: 300px;
+  border-right: 1px solid #dee0e3;
+}
+
+.left > .tree {
+  text-align: left;
+}
+
+.AddressListPageBox :global(.ant-tree-list-scrollbar-thumb) {
+  background-color: #ececec !important;
+}
+
+.AddressListPageBox :global(.ant-input-affix-wrapper) {
+  width: 270px;
+  height: 32px;
+  margin: 0 0 6px 14px;
+  border-radius: 50px !important;
+  color: #666;
+}
+
+/* :global(.ant-tabs-top > .ant-tabs-nav::before) {
+  display: none !important;
+} */
+
+.list {
+  font-size: 14px;
+}
+
+.AddressListPageBox :global(.none) {
+  display: none;
+}
+.AddressListPageBox :global(.block) {
+  display: block;
+}
+
+.AddressListPageBox :global(.ant-tree) {
+  padding-right: 20px;
+  margin-left: 10px;
+}
+
+.AddressListPageBox :global(.ant-tree .ant-tree-treenode) {
+  height: 32px;
+  align-items: center;
+}
+
+.AddressListPageBox :global(.ant-tree-switcher) {
+  line-height: 32px;
+  text-align: right;
+  padding-right: 2px;
+}
+
+.AddressListPageBox :global(.ant-tree-node-selected) {
+  background-color: #eff0f1 !important;
+}
+
+.center {
+  flex-basis: 250px;
+  text-align: left;
+  border-right: 1px solid #dee0e3;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

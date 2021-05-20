@@ -1,0 +1,38 @@
+html,
+body {
+  height: 100%;
+}
+
+.content {
+  text-align: center;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  /* -webkit-app-region: drag; */
+}
+
+.rightBox {
+  width: 100%;
+}
+
+.line {
+  width: 100%;
+  /* height: 24px; */
+  height: 24px;
+  border-bottom: 1px solid #dee0e3;
+  -webkit-app-region: drag;
+}
+
+.line .winOpera {
+  text-align: right;
+  /* margin-right: 10px; */
+  /* display: flex; */
+}
+
+.line .winOpera .operaImg {
+  -webkit-app-region: no-drag;
+}
+
+.route {
+  height: 100%;
+}

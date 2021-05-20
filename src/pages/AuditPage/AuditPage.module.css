@@ -1,0 +1,42 @@
+.AuditPageBox {
+  height: 100%;
+  display: flex;
+  text-align: left;
+}
+
+.left {
+  flex-basis: 200px;
+  border-right: 1px solid #dee0e3;
+}
+
+.left .title {
+  margin: 20px 0 20px 12px;
+}
+
+.left .list {
+  height: 50px;
+  line-height: 50px;
+  font-size: 14px;
+}
+
+.AuditPageBox :global(.auditShow) {
+  background-color: #eff0f1 !important;
+}
+
+.list:hover {
+  background-color: #f5f5f5;
+}
+
+.left .list .img {
+  margin: 0 12px 0 24px;
+}
+
+.right {
+  flex: 1;
+  /* width: calc(100% - 200px); */
+  /* padding: 0 24px; */
+}
+
+.AuditPageBox :global(.ant-tabs-nav-wrap) {
+  margin-left: 24px !important;
+}
