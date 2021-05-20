@@ -11,7 +11,7 @@ let mainWindow
 
 app.on('ready', async () => {
   autoUpdater.autoDownload = false
-  autoUpdater.checkForUpdates()
+  autoUpdater.checkForUpdatesAndNotify()
   // 报错提示
   autoUpdater.on('error', error => {
     dialog.showErrorBox(
