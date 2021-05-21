@@ -1,6 +1,6 @@
 const { app, BrowserWindow, Menu, dialog } = require('electron')
 const electron = require('electron')
-const { autoUpdater } = require("electron-updater")
+const { autoUpdater } = require('electron-updater')
 const isDev = require('electron-is-dev')
 const ipc = electron.ipcMain
 const path = require('path')
@@ -41,10 +41,15 @@ app.on('ready', async () => {
   })
   // 无更新
   autoUpdater.on('update-not-available', () => {
-    dialog.showMessageBox({
-      title: '没有新版本',
-      message: '当前已经是最新版本',
-    })
+    console.log(
+      dialog.showOpenDialog({
+        properties: ['openFile', 'openDirectory', 'multiSelections'],
+      }),
+    )
+    // dialog.showMessageBox({
+    //   title: '没有新版本',
+    //   message: '当前已经是最新版本',
+    // })
   })
   // autoUpdater.on('download-progress', progressObj => {
   //   let log_message = 'Download speed: ' + progressObj.bytesPerSecond
@@ -80,7 +85,8 @@ app.on('ready', async () => {
 
   ipc.on('close-app', () => {
     // 通知关闭
-    mainWindow.close()
+    // mainWindow.close()
+    mainWindow.exit()
   })
   ipc.on('max-app', () => {
     if (mainWindow.isMaximized()) {
