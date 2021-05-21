@@ -36,8 +36,10 @@ type DataSourceType = {
 const defaultData = [
   {
     id: 624748504,
-    title: '活动名称一活动名称一活动名称一活动名称一活动名称一活动名称一活动名称一',
-    name: '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
+    title:
+      '活动名称一活动名称一活动名称一活动名称一活动名称一活动名称一活动名称一',
+    name:
+      '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
     principal: 'zhangsan',
     state: 'open',
     time: '2020-05-26',
@@ -53,7 +55,8 @@ const defaultData = [
   },
   {
     id: 624691239,
-    name: '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
+    name:
+      '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
     title:
       '活动名称三活动名称三活动名称三活动名称三活动名称三活动名称三活动名称三活动名称三活动名称三活动名称三活动名称三活动名称三',
     principal: 'wangwu',
@@ -66,7 +69,9 @@ export const Task: React.FC = () => {
   // 任务列表相关
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([])
   const [dataSource, setDataSource] = useState<DataSourceType[]>([])
-  const [position, setPosition] = useState<'top' | 'bottom' | 'hidden'>('hidden')
+  const [position, setPosition] = useState<'top' | 'bottom' | 'hidden'>(
+    'hidden',
+  )
   const [newRecord, setNewRecord] = useState({
     id: (Math.random() * 1000000).toFixed(0),
   })
@@ -169,7 +174,8 @@ export const Task: React.FC = () => {
       ellipsis: true,
       formItemProps: (form, { rowIndex }) => {
         return {
-          rules: rowIndex > 2 ? [{ required: true, message: '此项为必填项' }] : [],
+          rules:
+            rowIndex > 2 ? [{ required: true, message: '此项为必填项' }] : [],
         }
       },
       // 第二行不允许编辑
