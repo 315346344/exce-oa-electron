@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require('electron')
+const { app, BrowserWindow, Menu, dialog } = require('electron')
 const electron = require('electron')
 const { autoUpdater } = require("electron-updater")
 const isDev = require('electron-is-dev')
@@ -10,16 +10,16 @@ let mainWindow
 // app.commandLine.appendSwitch('disable-web-security')
 
 app.on('ready', async () => {
-  alert(autoUpdater)
+  console.log('111')
   autoUpdater.autoDownload = false
   autoUpdater.checkForUpdatesAndNotify()
   // 报错提示
-  autoUpdater.on('error', error => {
-    dialog.showErrorBox(
-      'Error: ',
-      error == null ? 'unknown' : (error.stack || error).toString(),
-    )
-  })
+  // autoUpdater.on('error', error => {
+  //   dialog.showErrorBox(
+  //     'Error: ',
+  //     error == null ? 'unknown' : (error.stack || error).toString(),
+  //   )
+  // })
   // autoUpdater.on('checking-for-update', () => {
   //   console.log('Checking for update...')
   // })
