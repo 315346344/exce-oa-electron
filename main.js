@@ -10,7 +10,6 @@ let mainWindow
 // app.commandLine.appendSwitch('disable-web-security')
 
 app.on('ready', async () => {
-  console.log('111')
   autoUpdater.autoDownload = false
   autoUpdater.checkForUpdatesAndNotify()
   // 报错提示
@@ -25,27 +24,24 @@ app.on('ready', async () => {
   // })
   // 更新提示
   autoUpdater.on('update-available', () => {
-    dialog.showMessageBox(
-      {
-        type: 'info',
-        title: '应用有新的版本',
-        message: '发现新版本，是否现在更新?',
-        buttons: ['是', '否'],
-      },
-      buttonIndex => {
-        if (buttonIndex === 0) {
-          autoUpdater.downloadUpdate()
-        }
-      },
-    )
+    dialog.showErrorBox('title', 'content')
+    // dialog.showMessageBox(
+    //   {
+    //     type: 'info',
+    //     title: '应用有新的版本',
+    //     message: '发现新版本，是否现在更新?',
+    //     buttons: ['是', '否'],
+    //   },
+    //   buttonIndex => {
+    //     if (buttonIndex === 0) {
+    //       autoUpdater.downloadUpdate()
+    //     }
+    //   },
+    // )
   })
   // 无更新
   autoUpdater.on('update-not-available', () => {
-    console.log(
-      dialog.showOpenDialog({
-        properties: ['openFile', 'openDirectory', 'multiSelections'],
-      }),
-    )
+    dialog.showErrorBox('title', 'content')
     // dialog.showMessageBox({
     //   title: '没有新版本',
     //   message: '当前已经是最新版本',
@@ -85,8 +81,8 @@ app.on('ready', async () => {
 
   ipc.on('close-app', () => {
     // 通知关闭
-    // mainWindow.close()
-    mainWindow.exit()
+    mainWindow.close()
+    // mainWindow.exit()
   })
   ipc.on('max-app', () => {
     if (mainWindow.isMaximized()) {
