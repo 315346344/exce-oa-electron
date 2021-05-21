@@ -55,7 +55,12 @@ app.on('ready', async () => {
     let log_message = 'Download speed: ' + progressObj.bytesPerSecond
     log_message = log_message + ' - Downloaded ' + progressObj.percent + '%'
     log_message =
-      log_message + ' (' + progressObj.transferred + '/' + progressObj.total + ')'
+      log_message +
+      ' (' +
+      progressObj.transferred +
+      '/' +
+      progressObj.total +
+      ')'
     console.log(log_message)
   })
 
