@@ -1,10 +1,6 @@
 {
   "name": "oa-client",
-<<<<<<< HEAD
-  "version": "0.0.9",
-=======
-  "version": "0.0.8",
->>>>>>> 9f7bc4a4e7c55d313bd14c613d624a1090c1e96a
+  "version": "0.1.0",
   "main": "main.js",
   "description": "Excellemed OA",
   "author": {
