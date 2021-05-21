@@ -10,6 +10,7 @@ let mainWindow
 // app.commandLine.appendSwitch('disable-web-security')
 
 app.on('ready', async () => {
+  alert(autoUpdater)
   autoUpdater.autoDownload = false
   autoUpdater.checkForUpdatesAndNotify()
   // 报错提示
