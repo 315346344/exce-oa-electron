@@ -1,6 +1,6 @@
 {
   "name": "oa-client",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "main.js",
   "description": "Excellemed OA",
   "author": {
@@ -48,7 +48,7 @@
     "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "release": "cross-env GH_TOKEN=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 electron-builder",
+    "release": "cross-env GH_TOKEN=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 electron-builder",
     "prerelease": "npm run build",
     "prepack": "npm run build",
     "predist": "npm run build"
