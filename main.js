@@ -118,4 +118,9 @@ app.on('ready', async () => {
     : `file://${path.join(__dirname, './build/index.html')}`
 
   await mainWindow.loadURL(urlLocation)
+
+  setTimeout(() => {
+    // 检测是否有更新
+    autoUpdater.checkForUpdates()
+  }, 1500)
 })
