@@ -1,126 +1,166 @@
-const { app, BrowserWindow, Menu, dialog } = require('electron')
+const { app, BrowserWindow, Menu, Tray, dialog, nativeImage } = require('electron')
 const electron = require('electron')
-const { autoUpdater } = require('electron-updater')
+// const { autoUpdater } = require('electron-updater')
 const isDev = require('electron-is-dev')
 const ipc = electron.ipcMain
 const path = require('path')
 
 let mainWindow
+let tray = null
 
-// app.commandLine.appendSwitch('disable-web-security')
+// 多开禁止
+const gotTheLock = app.requestSingleInstanceLock()
+if (!gotTheLock) {
+  app.quit()
+} else {
+  // if (mainWindow) {
+  //   if (mainWindow.isMinimized()) mainWindow.restore()
+  //   mainWindow.focus()
+  // }
 
-app.on('ready', async () => {
-  if (isDev) {
-    autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml')
-  }
+  app.on('ready', async () => {
+    // 更新组件
+    // if (isDev) {
+    //   autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml')
+    // }
 
-  autoUpdater.autoDownload = false
-  autoUpdater.checkForUpdates()
-  // 报错提示
-  autoUpdater.on('error', error => {
-    dialog.showErrorBox(
-      'Error: ',
-      error == null ? 'unknown' : (error.stack || error).toString(),
-    )
-  })
-  autoUpdater.on('checking-for-update', () => {
-    console.log('Checking for update...')
-  })
-  // 更新提示
-  autoUpdater.on('update-available', () => {
-    dialog.showMessageBox(
-      {
-        type: 'info',
-        title: '应用有新的版本',
-        message: '发现新版本，是否现在更新?',
-        buttons: ['是', '否'],
+    // autoUpdater.autoDownload = false
+    // autoUpdater.checkForUpdates()
+    // // 报错提示
+    // autoUpdater.on('error', error => {
+    //   dialog.showErrorBox(
+    //     'Error: ',
+    //     error == null ? 'unknown' : (error.stack || error).toString(),
+    //   )
+    // })
+    // autoUpdater.on('checking-for-update', () => {
+    //   console.log('Checking for update...')
+    // })
+    // // 更新提示
+    // autoUpdater.on('update-available', () => {
+    //   dialog.showMessageBox(
+    //     {
+    //       type: 'info',
+    //       title: '应用有新的版本',
+    //       message: '发现新版本，是否现在更新?',
+    //       buttons: ['是', '否'],
+    //     },
+    //     buttonIndex => {
+    //       if (buttonIndex === 0) {
+    //         autoUpdater.downloadUpdate()
+    //       }
+    //     },
+    //   )
+    // })
+    // // 无更新
+    // autoUpdater.on('update-not-available', () => {
+    //   dialog.showMessageBox({
+    //     title: '没有新版本',
+    //     message: '当前已经是最新版本',
+    //   })
+    // })
+
+    // // 下载信息
+    // autoUpdater.on('download-progress', progressObj => {
+    //   let log_message = 'Download speed: ' + progressObj.bytesPerSecond
+    //   log_message = log_message + ' - Downloaded ' + progressObj.percent + '%'
+    //   log_message =
+    //     log_message +
+    //     ' (' +
+    //     progressObj.transferred +
+    //     '/' +
+    //     progressObj.total +
+    //     ')'
+    //   console.log(log_message)
+    // })
+
+    // // 下载完毕
+    // autoUpdater.on('update-downloaded', () => {
+    //   dialog.showMessageBox(
+    //     {
+    //       title: '安装更新',
+    //       message: '更新下载完毕，应用将重启并进行安装',
+    //     },
+    //     () => {
+    //       setImmediate(() => autoUpdater.quitAndInstall())
+    //     },
+    //   )
+    // })
+
+    mainWindow = new BrowserWindow({
+      width: 1200,
+      height: 700,
+      minWidth: 1200,
+      minHeight: 700,
+      frame: false,
+      webPreferences: {
+        nodeIntegration: true,
+        // webSecurity: false,
       },
-      buttonIndex => {
-        if (buttonIndex === 0) {
-          autoUpdater.downloadUpdate()
-        }
-      },
-    )
-  })
-  // 无更新
-  autoUpdater.on('update-not-available', () => {
-    dialog.showMessageBox({
-      title: '没有新版本',
-      message: '当前已经是最新版本',
     })
-  })
 
-  // 下载信息
-  autoUpdater.on('download-progress', progressObj => {
-    let log_message = 'Download speed: ' + progressObj.bytesPerSecond
-    log_message = log_message + ' - Downloaded ' + progressObj.percent + '%'
-    log_message =
-      log_message +
-      ' (' +
-      progressObj.transferred +
-      '/' +
-      progressObj.total +
-      ')'
-    console.log(log_message)
-  })
+    ipc.on('close-app', () => {
+      // 通知关闭
+      mainWindow.close()
+      // mainWindow.exit()
+    })
+    ipc.on('max-app', () => {
+      if (mainWindow.isMaximized()) {
+        // 若已经是最大化了，则还原
+        mainWindow.unmaximize()
+      } else {
+        // 最大化窗口
+        mainWindow.maximize()
+      }
+    })
+    ipc.on('min-app', () => {
+      // 最小化
+      mainWindow.minimize()
+    })
 
-  // 下载完毕
-  autoUpdater.on('update-downloaded', () => {
-    dialog.showMessageBox(
-      {
-        title: '安装更新',
-        message: '更新下载完毕，应用将重启并进行安装',
-      },
-      () => {
-        setImmediate(() => autoUpdater.quitAndInstall())
-      },
-    )
-  })
-  // await require('devtron').install()
-  mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 700,
-    minWidth: 1200,
-    minHeight: 700,
-    frame: false,
-    webPreferences: {
-      nodeIntegration: true,
-      // webSecurity: false,
-    },
-  })
-
-  ipc.on('close-app', () => {
-    // 通知关闭
-    mainWindow.close()
-    // mainWindow.exit()
-  })
-  ipc.on('max-app', () => {
-    if (mainWindow.isMaximized()) {
-      // 若已经是最大化了，则还原
-      mainWindow.unmaximize()
-    } else {
-      // 最大化窗口
-      mainWindow.maximize()
+    if (isDev) {
+      mainWindow.webContents.openDevTools({ mode: 'detach' })
     }
+    Menu.setApplicationMenu(null)
+
+    let urlLocation = isDev
+      ? 'http://localhost:3000'
+      : `file://${path.join(__dirname, './build/index.html')}`
+
+    await mainWindow.loadURL(urlLocation)
+
+    // app.whenReady().then(() => {
+    //   // tray = new Tray('assets/logo.png')
+    //   tray = new Tray(path.join(__dirname, './assets/logo.png'));
+    //   const contextMenu = Menu.buildFromTemplate([
+    //     { label: 'Item1', type: 'radio' },
+    //     { label: 'Item2', type: 'radio' },
+    //     { label: 'Item3', type: 'radio', checked: true },
+    //     { label: 'Item4', type: 'radio' },
+    //   ])
+    //   tray.setToolTip('This is my application.')
+    //   tray.setContextMenu(contextMenu)
+    // })
+
+    // const icon = path.join(__dirname, '/assets/icon.ico')
+    // tray = new Tray(nativeImage.createFromPath(icon))
+    // tray = new Tray(trayIcon)
+
+    // tray = new Tray(path.join(__dirname, '/.icon-ico/icon.ico'))
+    // tray = new Tray(path.join(__dirname, '/assets/icon.ico'))
+    tray = new Tray(path.join(app.getPath('exe','/assets/icon.ico')))
+
+    const contextMenu = Menu.buildFromTemplate([
+      {
+        label: '退出',
+        click: function () {
+          app.quit()
+        },
+      },
+    ])
+    tray.setToolTip('传慎考勤')
+    tray.setContextMenu(contextMenu)
+
   })
-  ipc.on('min-app', () => {
-    // 最小化
-    mainWindow.minimize()
-  })
+}
 
-  if (isDev) {
-    mainWindow.webContents.openDevTools({ mode: 'detach' })
-  }
-  Menu.setApplicationMenu(null)
-
-  let urlLocation = isDev
-    ? 'http://localhost:3000'
-    : `file://${path.join(__dirname, './build/index.html')}`
-
-  await mainWindow.loadURL(urlLocation)
-
-  setTimeout(() => {
-    // 检测是否有更新
-    autoUpdater.checkForUpdates()
-  }, 1500)
-})

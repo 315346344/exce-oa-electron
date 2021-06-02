@@ -1,6 +1,6 @@
 {
   "name": "oa-client",
-  "version": "0.2.6",
+  "version": "0.3.4",
   "main": "main.js",
   "description": "Excellemed OA",
   "author": {
@@ -48,7 +48,7 @@
     "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "release": "cross-env GH_TOKEN=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 electron-builder",
+    "release": "cross-env GH_TOKEN=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 electron-builder",
     "prerelease": "npm run build",
     "prepack": "npm run build",
     "predist": "npm run build"
@@ -77,7 +77,7 @@
         "msi",
         "nsis"
       ],
-      "icon": "assets/icon.ico",
+      "icon": "assets/logo.png",
       "artifactName": "${productName}-Web-Setup-${version}.${ext}",
       "publisherName": "Jing Bai"
     },
