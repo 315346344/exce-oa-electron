@@ -1,4 +1,11 @@
-const { app, BrowserWindow, Menu, Tray, dialog, nativeImage } = require('electron')
+const {
+  app,
+  BrowserWindow,
+  Menu,
+  Tray,
+  dialog,
+  nativeImage,
+} = require('electron')
 const electron = require('electron')
 // const { autoUpdater } = require('electron-updater')
 const isDev = require('electron-is-dev')
@@ -129,26 +136,12 @@ if (!gotTheLock) {
 
     await mainWindow.loadURL(urlLocation)
 
-    // app.whenReady().then(() => {
-    //   // tray = new Tray('assets/logo.png')
-    //   tray = new Tray(path.join(__dirname, './assets/logo.png'));
-    //   const contextMenu = Menu.buildFromTemplate([
-    //     { label: 'Item1', type: 'radio' },
-    //     { label: 'Item2', type: 'radio' },
-    //     { label: 'Item3', type: 'radio', checked: true },
-    //     { label: 'Item4', type: 'radio' },
-    //   ])
-    //   tray.setToolTip('This is my application.')
-    //   tray.setContextMenu(contextMenu)
-    // })
-
-    // const icon = path.join(__dirname, '/assets/icon.ico')
-    // tray = new Tray(nativeImage.createFromPath(icon))
-    // tray = new Tray(trayIcon)
-
-    // tray = new Tray(path.join(__dirname, '/.icon-ico/icon.ico'))
-    // tray = new Tray(path.join(__dirname, '/assets/icon.ico'))
-    tray = new Tray(path.join(app.getPath('exe','/assets/icon.ico')))
+    // 托盘
+    let mpath = path.join(
+      path.dirname(app.getPath('exe')),
+      '/resources/assets/logo.png',
+    )
+    tray = new Tray(mpath)
 
     const contextMenu = Menu.buildFromTemplate([
       {
@@ -160,7 +153,5 @@ if (!gotTheLock) {
     ])
     tray.setToolTip('传慎考勤')
     tray.setContextMenu(contextMenu)
-
   })
 }
-

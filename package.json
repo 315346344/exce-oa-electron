@@ -1,6 +1,6 @@
 {
   "name": "oa-client",
-  "version": "0.3.4",
+  "version": "0.3.6",
   "main": "main.js",
   "description": "Excellemed OA",
   "author": {
@@ -67,6 +67,9 @@
       "settings/**/*",
       "package.json",
       "main.js"
+    ],
+    "extraResources":[
+      "assets/*"
     ],
     "directories": {
       "buildResources": "assets"
