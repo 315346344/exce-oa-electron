@@ -106,10 +106,11 @@ if (!gotTheLock) {
       },
     })
 
-    ipc.on('close-app', () => {
-      // 通知关闭
-      mainWindow.close()
-      // mainWindow.exit()
+    // 右上角关闭，不退出，做隐藏处理
+    ipc.on('close-app', e => {
+      // mainWindow.close()
+      e.preventDefault()
+      mainWindow.hide()
     })
     ipc.on('max-app', () => {
       if (mainWindow.isMaximized()) {
@@ -141,17 +142,41 @@ if (!gotTheLock) {
       path.dirname(app.getPath('exe')),
       '/resources/assets/logo.png',
     )
+    let emptypath = path.join(
+      path.dirname(app.getPath('exe')),
+      '/resources/assets/empty.ico',
+    )
     tray = new Tray(mpath)
+
+    // 是否可以退出
+    trayClose = false
 
     const contextMenu = Menu.buildFromTemplate([
       {
         label: '退出',
         click: function () {
+          trayClose = true
           app.quit()
         },
       },
     ])
     tray.setToolTip('传慎考勤')
     tray.setContextMenu(contextMenu)
+    // 点击托盘图标显示主窗口
+    tray.on('click', () => {
+      mainWindow.show()
+    })
+
+    // 托盘闪烁
+    let count = 0
+    let timer = null
+    timer = setInterval(function () {
+      count++
+      if (count % 2 == 0) {
+        tray.setImage(emptypath)
+      } else {
+        tray.setImage(mpath)
+      }
+    }, 300)
   })
 }
