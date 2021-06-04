@@ -95,10 +95,12 @@ if (!gotTheLock) {
     // })
 
     mainWindow = new BrowserWindow({
-      width: 1200,
-      height: 700,
-      minWidth: 1200,
-      minHeight: 700,
+      // width: 1200,
+      // height: 700,
+      // minWidth: 1200,
+      // minHeight: 700,
+      width: 720,
+      height: 480,
       frame: false,
       webPreferences: {
         nodeIntegration: true,
@@ -177,6 +179,6 @@ if (!gotTheLock) {
       } else {
         tray.setImage(mpath)
       }
-    }, 300)
+    }, 500)
   })
 }

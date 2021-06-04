@@ -28,6 +28,7 @@ const imgArr: imgArrType[] = [
 // 参数：路由，iocn数据，iocn下标，icon父级的DOM元素, 当前路由
 const iconShow = (history, data, index, svgEl) => {
   history.push('/' + data.route)
+  console.log(data.route)
 
   // 清除所有icon的选中样式
   Array.from(svgEl.current.children).map((item: any, i) => {

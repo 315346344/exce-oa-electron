@@ -15,7 +15,7 @@ import {
 const BasicRoute = () => (
   <HashRouter>
     <Switch>
-      <Route exact path="/login" component={LoginPage} />
+      <Route path="/login" component={LoginPage} />
       <Route
         path="/"
         render={() => (
@@ -27,7 +27,8 @@ const BasicRoute = () => (
             <Route path="/audit" component={AuditPage} />
             <Route path="/clockingIn" component={ClockingInPage} />
             <Route path="/report" component={ReportPage} />
-            <Redirect from="/" to="/chat" />
+            {/* <Redirect from="/" to="/chat" /> */}
+            <Redirect from="/" to="/login" />
           </HomePage>
         )}
       />
