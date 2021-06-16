@@ -27,7 +27,7 @@ const imgArr: imgArrType[] = [
 // icon点击切换选中状态
 // 参数：路由，iocn数据，iocn下标，icon父级的DOM元素, 当前路由
 const iconShow = (history, data, index, svgEl) => {
-  history.push('/' + data.route)
+  history.push('/home/' + data.route)
   console.log(data.route)
 
   // 清除所有icon的选中样式

@@ -18,11 +18,11 @@ export const ClockingInPage: React.FC = () => {
     if (id === 1) {
       tapEL1.current.className = styles.list + ' clockingInShow'
       tapEL2.current.className = styles.list
-      history.push('/clockingIn/1')
+      history.push('/home/clockingIn/1')
     } else if (id === 2) {
       tapEL2.current.className = styles.list + ' clockingInShow'
       tapEL1.current.className = styles.list
-      history.push('/clockingIn/2')
+      history.push('/home/clockingIn/2')
     }
   }
   return (
@@ -55,9 +55,9 @@ export const ClockingInPage: React.FC = () => {
 
       <div className={styles.right}>
         <Switch>
-          <Route path="/clockingIn/1" component={CheckInForm} />
-          <Route path="/clockingIn/2" component={SignInForm} />
-          <Redirect from="/clockingIn" to="/clockingIn/1" />
+          <Route path="/home/clockingIn/1" component={CheckInForm} />
+          <Route path="/home/clockingIn/2" component={SignInForm} />
+          <Redirect from="/home/clockingIn" to="/home/clockingIn/1" />
         </Switch>
       </div>
     </div>

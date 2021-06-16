@@ -67,9 +67,13 @@ const defaultData = [
 ]
 
 // 穿搜框
-const isChecked = (selectedKeys, eventKey) => selectedKeys.indexOf(eventKey) !== -1
+const isChecked = (selectedKeys, eventKey) =>
+  selectedKeys.indexOf(eventKey) !== -1
 
-const generateTree = (treeNodes: Array<any> = [], checkedKeys: Array<any> = []) =>
+const generateTree = (
+  treeNodes: Array<any> = [],
+  checkedKeys: Array<any> = [],
+) =>
   treeNodes.map(({ children, ...props }) => ({
     ...props,
     disabled: checkedKeys.includes(props.key),
@@ -160,7 +164,10 @@ const TreeTransfer: React.FC<TreeTransferPropsType> = ({
                 onItemSelect(key.toString(), !isChecked(checkedKeys, key))
               }}
               onSelect={(_, { node: { key } }) => {
-                onItemSelect(key.toString() as string, !isChecked(checkedKeys, key))
+                onItemSelect(
+                  key.toString() as string,
+                  !isChecked(checkedKeys, key),
+                )
               }}
             />
           )
@@ -274,7 +281,8 @@ export const Project: React.FC = () => {
       ellipsis: true,
       formItemProps: (form, { rowIndex }) => {
         return {
-          rules: rowIndex > 2 ? [{ required: true, message: '此项为必填项' }] : [],
+          rules:
+            rowIndex > 2 ? [{ required: true, message: '此项为必填项' }] : [],
         }
       },
       // 第二行不允许编辑
@@ -434,7 +442,7 @@ export const Project: React.FC = () => {
             <div className={styles.documentLine}></div>
             <div className={styles.documentRight}>
               <Switch>
-                <Route path="/project" component={ProjectDoc} />
+                <Route path="/home/project" component={ProjectDoc} />
 
                 {/* <Redirect from="/audit" to="/audit/0" /> */}
               </Switch>
@@ -467,7 +475,10 @@ export const Project: React.FC = () => {
               setResponsive(offset.width < 640)
             }}
           >
-            <ProCard split={responsive ? 'horizontal' : 'vertical'} headerBordered>
+            <ProCard
+              split={responsive ? 'horizontal' : 'vertical'}
+              headerBordered
+            >
               <ProCard split="horizontal">
                 <ProCard split="horizontal">
                   <ProCard split="vertical">
@@ -505,7 +516,10 @@ export const Project: React.FC = () => {
                     />
                   </ProCard>
                 </ProCard>
-                <StatisticCard title="任务量走势" chart={<Area {...config} />} />
+                <StatisticCard
+                  title="任务量走势"
+                  chart={<Area {...config} />}
+                />
               </ProCard>
               {/* <StatisticCard
                 title="项目进度分析"

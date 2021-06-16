@@ -27,8 +27,11 @@ export const AddressListPage: React.FC = props => {
 
       <div className={styles.center}>
         <Switch>
-          <Route path="/addressList/:personnelListId" component={PersonnelList} />
-          <Redirect from="/addressList" to="/addressList/01/01" />
+          <Route
+            path="/home/addressList/:personnelListId"
+            component={PersonnelList}
+          />
+          <Redirect from="/home/addressList" to="/addressList/01/01" />
         </Switch>
       </div>
 

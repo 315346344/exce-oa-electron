@@ -207,7 +207,7 @@ export const FrameworkTree: React.FC = () => {
         }
       })
     }
-    history.push('/addressList/' + selectedKeys + '/01')
+    history.push('/home/addressList/' + selectedKeys + '/01')
   }
 
   const loop = data =>
@@ -219,7 +219,10 @@ export const FrameworkTree: React.FC = () => {
         index > -1 ? (
           <span>
             {beforeStr}
-            <span className="site-tree-search-value" style={{ color: '#1890FF' }}>
+            <span
+              className="site-tree-search-value"
+              style={{ color: '#1890FF' }}
+            >
               {searchValue}
             </span>
             {afterStr}
@@ -238,7 +241,11 @@ export const FrameworkTree: React.FC = () => {
     })
   return (
     <div>
-      <Input placeholder="搜索" prefix={<SearchOutlined />} onChange={onChange} />
+      <Input
+        placeholder="搜索"
+        prefix={<SearchOutlined />}
+        onChange={onChange}
+      />
       <Tree
         height={tableHeight}
         blockNode

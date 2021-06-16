@@ -24,7 +24,7 @@ export const ReportPage: React.FC = () => {
 
   const clickTap = data => {
     Array.from(tapEL.current.children).map((item: any, index) => {
-      history.push('/report' + '/' + data)
+      history.push('/home/report' + '/' + data)
       if (data === index) {
         item.className = styles.list + ' auditShow'
       } else {
@@ -71,8 +71,8 @@ export const ReportPage: React.FC = () => {
 
       <div className={styles.right}>
         <Switch>
-          <Route path="/report/0" component={ReportWrite} />
-          <Route path="/report/1" component={ReportExamine} />
+          <Route path="/home/report/0" component={ReportWrite} />
+          <Route path="/home/report/1" component={ReportExamine} />
 
           <Redirect from="/report" to="/report/0" />
         </Switch>

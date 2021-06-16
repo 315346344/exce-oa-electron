@@ -36,7 +36,7 @@ export const TaskPage: React.FC = () => {
     Array.from(tapEL.current.children).map((item: any, count) => {
       if (index === count) {
         item.children[0].className = styles.list + ' taskShow'
-        history.push('/task' + '/' + item.className)
+        history.push('/home/task' + '/' + item.className)
       } else {
         item.children[0].className = styles.list
       }
@@ -71,7 +71,7 @@ export const TaskPage: React.FC = () => {
 
       <div className={styles.right}>
         <Switch>
-          <Route path="/task" component={Task} />
+          <Route path="/home/task" component={Task} />
 
           {/* <Redirect from="/audit" to="/audit/0" /> */}
         </Switch>

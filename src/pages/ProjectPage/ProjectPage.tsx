@@ -37,7 +37,7 @@ export const ProjectPage: React.FC = () => {
     Array.from(tapEL.current.children).map((item: any, count) => {
       if (index === count) {
         item.children[0].className = styles.list + ' projectShow'
-        history.push('/project' + '/' + item.className)
+        history.push('/home/project' + '/' + item.className)
       } else {
         item.children[0].className = styles.list
       }
@@ -77,7 +77,7 @@ export const ProjectPage: React.FC = () => {
 
       <div className={styles.right}>
         <Switch>
-          <Route path="/project" component={Project} />
+          <Route path="/home/project" component={Project} />
 
           {/* <Redirect from="/audit" to="/audit/0" /> */}
         </Switch>

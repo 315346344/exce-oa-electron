@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './LoginPage.module.css'
-import { useHistory, useLocation } from 'react-router-dom'
+import useAxios from '../../hooks/UseAxios'
+// import axios from 'axios'
 
 import { message } from 'antd'
 import ProForm, { ProFormText, ProFormCaptcha } from '@ant-design/pro-form'
@@ -14,6 +15,10 @@ import cls from '../../assets/cls.png'
 
 const ipc = window.require('electron').ipcRenderer
 
+// 改变窗口大小
+const changeApp = () => {
+  ipc.send('login')
+}
 // 关闭app
 const closeApp = () => {
   ipc.send('close-app')
@@ -36,8 +41,36 @@ const waitTime = (time: number = 100) => {
 }
 
 export const LoginPage = () => {
-  const history = useHistory()
-  const location = useLocation()
+  // const [urlData, setUrlData] = useAxios(
+  //   {
+  //     method: 'post',
+  //     url: 'http://10.10.10.137:8889/users/login',
+  //     data: {
+  //       username: '18721808025',
+  //       password: '123456',
+  //       client_type: 0,
+  //     },
+  //   },
+  //   false,
+  // )
+
+  // let [loginData, setLoginData] = useState()
+
+  const [urlData, setUrlData] = useAxios(
+    { method: 'post', url: 'http://10.10.10.137:8889/users/login' },
+    false,
+  )
+
+  const onFinish = async () => {
+    await setUrlData({
+      username: '18721808025',
+      password: '123456',
+      client_type: 0,
+    })
+
+    console.log(urlData.data)
+  }
+
   return (
     <div className={styles.loginBox}>
       <div className={styles.winOpera}>
@@ -65,12 +98,7 @@ export const LoginPage = () => {
 
       <div className={styles.LoginPageBox}>
         <ProForm
-          onFinish={async () => {
-            await waitTime(2000)
-            message.success('提交成功')
-            history.push('/chat')
-            console.log(history)
-          }}
+          onFinish={onFinish}
           submitter={{
             searchConfig: {
               submitText: '登录',
@@ -153,5 +181,3 @@ export const LoginPage = () => {
     </div>
   )
 }
-
-// 方正粗黑宋简体

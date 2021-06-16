@@ -104,10 +104,15 @@ if (!gotTheLock) {
       frame: false,
       webPreferences: {
         nodeIntegration: true,
-        // webSecurity: false,
+        webSecurity: false,
       },
     })
 
+    ipc.on('login', () => {
+      // 改变窗口大小
+      mainWindow.setSize(1200, 700)
+      // mainWindow.center()
+    })
     // 右上角关闭，不退出，做隐藏处理
     ipc.on('close-app', e => {
       // mainWindow.close()

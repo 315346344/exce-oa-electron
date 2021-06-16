@@ -51,15 +51,19 @@ export const ChatPage: React.FC = () => {
     })
 
     if (item.type === 'auditCard') {
-      history.push('/chat/auditCard')
+      history.push('/home/chat/auditCard')
     } else {
-      history.push('/chat/' + item.id)
+      history.push('/home/chat/' + item.id)
     }
   }
   return (
     <div className={styles.ChatPageBox}>
       <div className={styles.left}>
-        <Input placeholder="搜索" className={styles.search} prefix={<SearchOutlined />} />
+        <Input
+          placeholder="搜索"
+          className={styles.search}
+          prefix={<SearchOutlined />}
+        />
         <div className={styles.group} ref={listRef}>
           {listData.map((item, index) => {
             return (
@@ -73,7 +77,9 @@ export const ChatPage: React.FC = () => {
                 <img src={item.img} className={styles.avatar} />
                 <div className={styles.data}>
                   <div>{item.name}</div>
-                  <div style={{ fontSize: '12px', color: '#999999' }}>{item.text}</div>
+                  <div style={{ fontSize: '12px', color: '#999999' }}>
+                    {item.text}
+                  </div>
                 </div>
                 <div className={styles.time}>{item.time}</div>
               </div>
@@ -91,8 +97,8 @@ export const ChatPage: React.FC = () => {
 
       <div className={styles.right}>
         <Switch>
-          <Route path="/chat/:userId" component={Chat} />
-          <Redirect from="/chat" to="/chat/01" />
+          <Route path="/home/chat/:userId" component={Chat} />
+          <Redirect from="/home/chat" to="/chat/01" />
         </Switch>
       </div>
     </div>

@@ -145,10 +145,11 @@ export const PersonnelList: React.FC = () => {
     })
 
     // 点击icon的样式改动
-    itemEL.current.children[index].className = styles.list + ' PersonnelListClick'
+    itemEL.current.children[index].className =
+      styles.list + ' PersonnelListClick'
 
     // 跳转路由
-    history.push('/addressList/' + value.addressListRouteId + '/' + id)
+    history.push('/home/addressList/' + value.addressListRouteId + '/' + id)
   }
   return (
     <div className={styles.box}>

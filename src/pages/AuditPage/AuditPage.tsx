@@ -60,7 +60,7 @@ export const AuditPage: React.FC = () => {
 
   const clickTap = data => {
     Array.from(tapEL.current.children).map((item: any, index) => {
-      history.push('/audit' + '/' + data)
+      history.push('/home/audit' + '/' + data)
       if (data === index) {
         item.className = styles.list + ' auditShow'
       } else {
@@ -107,15 +107,15 @@ export const AuditPage: React.FC = () => {
 
       <div className={styles.right}>
         <Switch>
-          <Route path="/audit/0" component={LeaveTap} />
-          <Route path="/audit/1" component={EvectionTap} />
-          <Route path="/audit/2" component={OvertimeTap} />
-          <Route path="/audit/3" component={GoOutTap} />
-          <Route path="/audit/4" component={ProcurementTap} />
-          <Route path="/audit/5" component={ReimbursementTap} />
-          <Route path="/audit/6" component={ReissueCardTap} />
+          <Route path="/home/audit/0" component={LeaveTap} />
+          <Route path="/home/audit/1" component={EvectionTap} />
+          <Route path="/home/audit/2" component={OvertimeTap} />
+          <Route path="/home/audit/3" component={GoOutTap} />
+          <Route path="/home/audit/4" component={ProcurementTap} />
+          <Route path="/home/audit/5" component={ReimbursementTap} />
+          <Route path="/home/audit/6" component={ReissueCardTap} />
 
-          <Redirect from="/audit" to="/audit/0" />
+          <Redirect from="/home/audit" to="/home/audit/0" />
         </Switch>
       </div>
     </div>
