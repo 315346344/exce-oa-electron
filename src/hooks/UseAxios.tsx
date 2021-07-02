@@ -1,27 +1,27 @@
-import { useState, useEffect } from 'react'
-import Axios from 'axios'
+// import { useState, useEffect } from 'react'
+// import Axios from 'axios'
 
-export default (config, isMounted) => {
-  const [output, setOutput] = useState<any>({
-    error: undefined,
-    data: undefined,
-    // loading: false,
-  })
-  const refresh = (overwriteConfig?) => {
-    // setOutput({ ...output, loading: true })
-    return Axios.request({ ...config, data: overwriteConfig })
-      .then(data => setOutput({ ...output, data }))
-      .catch(error => setOutput({ ...output, error }))
-    // .then(data => setOutput({ ...output, data, loading: false }))
-    // .catch(error => setOutput({ ...output, error, loading: false }))
-  }
-  useEffect(() => {
-    if (isMounted) {
-      refresh()
-    }
-  }, [])
-  return [output, refresh]
-}
+// export default config => {
+//   const [output, setOutput] = useState<any>({
+//     error: undefined,
+//     data: undefined,
+//     // loading: false,
+//   })
+//   const refresh = (overwriteConfig?) => {
+//     // setOutput({ ...output, loading: true })
+//     return Axios.request({ ...config, data: overwriteConfig })
+//       .then(data => setOutput({ ...output, data }))
+//       .catch(error => setOutput({ ...output, error }))
+//     // .then(data => setOutput({ ...output, data, loading: false }))
+//     // .catch(error => setOutput({ ...output, error, loading: false }))
+//   }
+//   // useEffect(() => {
+//   //   if (isMounted) {
+//   //     refresh()
+//   //   }
+//   // }, [])
+//   return [output, refresh]
+// }
 
 // const [data, setData] = useAxios(
 //   {
@@ -47,34 +47,34 @@ export default (config, isMounted) => {
 // })
 
 // useAxios hook
-// import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import axios from '../http/http'
 // import axios from 'axios'
 
-// axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com'
+// axios.defaults.baseURL = 'http://10.10.10.137:8889'
 
-// const useAxios = ({ url, method, params }) => {
-//   const [response, setResponse] = useState(null)
-//   const [error, setError] = useState('')
-//   // const [loading, setloading] = useState(true)
+const useAxios = () => {
+  const [response, setResponse] = useState(null)
+  const [error, setError] = useState('')
+  const [loading, setloading] = useState(true)
 
-//   const fetchData = () => {
-//     axios[method](url, params)
-//       .then(res => {
-//         setResponse(res.data)
-//       })
-//       .catch(err => {
-//         setError(err)
-//       })
-//       // .finally(() => {
-//       //   setloading(false)
-//       // })
-//   }
+  const fetchData = ({ url, method, params }) => {
+    axios[method](url, params)
+      .then(res => {
+        setResponse(res.data)
+      })
+      .catch(err => {
+        setError(err)
+      })
+      .finally(() => {
+        setloading(false)
+      })
+  }
 
-//   useEffect(() => {
-//     fetchData()
-//   }, [method, url, params])
+  return { response, loading, error, fetchData }
+}
 
-//   // return { response, error, loading }
-// }
+export default useAxios
 
-// export default useAxios
+// 18721808025
+// 123456

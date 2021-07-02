@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import styles from './LoginPage.module.css'
-import useAxios from '../../hooks/UseAxios'
-// import axios from 'axios'
+// import useAxios from '../../hooks/UseAxios'
+import axios from '../../http/http'
+import jwt_decode from 'jwt-decode'
 
-import { message } from 'antd'
+import { message, Form } from 'antd'
 import ProForm, { ProFormText, ProFormCaptcha } from '@ant-design/pro-form'
 import { MobileOutlined, MailOutlined } from '@ant-design/icons'
 
@@ -41,34 +43,59 @@ const waitTime = (time: number = 100) => {
 }
 
 export const LoginPage = () => {
-  // const [urlData, setUrlData] = useAxios(
-  //   {
+  const [form] = Form.useForm()
+  const history = useHistory()
+  // const { response, fetchData }: any = useAxios()
+
+  // useEffect(() => {
+  //   if (response === null) return
+  // if (response.code === 0) {
+  //   // 获取token
+  //   window.sessionStorage.setItem('access_token', response.data.access_token)
+  //   window.sessionStorage.setItem(
+  //     'refresh_token',
+  //     response.data.refresh_token,
+  //   )
+  //   // 解析token获取失效时间
+  //   const decoded: any = jwt_decode(response.data.access_token)
+  //   window.sessionStorage.setItem('exp', decoded.exp)
+  //   // 跳转主窗口，改变窗口大小
+  //   history.push('/home/chat/01')
+  //   changeApp()
+  // } else {
+  //   // 重置表单and错误提示
+  //   form.resetFields()
+  //   message.warning(`用户名或密码错误，请重新输入！`)
+  // }
+  // }, [response])
+
+  // const onFinish = async params => {
+  //   params['client_type'] = 0
+  //   await fetchData({
   //     method: 'post',
-  //     url: 'http://10.10.10.137:8889/users/login',
-  //     data: {
-  //       username: '18721808025',
-  //       password: '123456',
-  //       client_type: 0,
-  //     },
-  //   },
-  //   false,
-  // )
+  //     url: '/users/login',
+  //     params,
+  //   })
+  // }
 
-  // let [loginData, setLoginData] = useState()
-
-  const [urlData, setUrlData] = useAxios(
-    { method: 'post', url: 'http://10.10.10.137:8889/users/login' },
-    false,
-  )
-
-  const onFinish = async () => {
-    await setUrlData({
-      username: '18721808025',
-      password: '123456',
-      client_type: 0,
-    })
-
-    console.log(urlData.data)
+  const onFinish = async params => {
+    params['client_type'] = 0
+    const { data }: any = await axios.post('/users/login', params)
+    if (data.code === 0) {
+      // 获取token
+      window.sessionStorage.setItem('access_token', data.data.access_token)
+      window.sessionStorage.setItem('refresh_token', data.data.refresh_token)
+      // 解析token获取失效时间
+      const decoded: any = jwt_decode(data.data.access_token)
+      window.sessionStorage.setItem('exp', (decoded.exp * 1000).toString())
+      // 跳转主窗口，改变窗口大小
+      history.push('/home/chat/01')
+      changeApp()
+    } else {
+      // 重置表单and错误提示
+      form.resetFields()
+      message.warning(`用户名或密码错误，请重新输入！`)
+    }
   }
 
   return (
@@ -99,6 +126,7 @@ export const LoginPage = () => {
       <div className={styles.LoginPageBox}>
         <ProForm
           onFinish={onFinish}
+          form={form}
           submitter={{
             searchConfig: {
               submitText: '登录',
@@ -141,7 +169,7 @@ export const LoginPage = () => {
               size: 'large',
               prefix: <MobileOutlined />,
             }}
-            name="phone"
+            name="username"
             placeholder="请输入手机号"
             rules={[
               {
@@ -154,7 +182,25 @@ export const LoginPage = () => {
               },
             ]}
           />
-          <ProFormCaptcha
+          <ProFormText.Password
+            fieldProps={{
+              size: 'large',
+              prefix: <MobileOutlined />,
+            }}
+            name="password"
+            placeholder="请输入密码"
+            rules={[
+              {
+                required: true,
+                message: '请输入密码!',
+              },
+              {
+                min: 6,
+                message: '密码最短6位!',
+              },
+            ]}
+          />
+          {/* <ProFormCaptcha
             fieldProps={{
               size: 'large',
               prefix: <MailOutlined />,
@@ -175,7 +221,7 @@ export const LoginPage = () => {
               await waitTime(1000)
               message.success(`手机号 ${phone} 验证码发送成功!`)
             }}
-          />
+          /> */}
         </ProForm>
       </div>
     </div>

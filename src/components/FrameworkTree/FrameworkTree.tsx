@@ -6,159 +6,134 @@ import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './FrameworkTree.module.css'
 import { Tree, Input } from 'antd'
+import axios from '../../http/http'
 
 import { SearchOutlined } from '@ant-design/icons'
 
 import { appSetStateContext } from '../../AppState'
 
-const gData = [
-  {
-    title: '上海传慎',
-    key: '上海传慎',
-    children: [
-      {
-        title: '研发部',
-        key: '研发部',
-        children: [
-          {
-            title: '研发子部',
-            key: '研发子部',
-          },
-        ],
-      },
-      {
-        title: '后勤部',
-        key: '后勤部',
-      },
-      {
-        title: '人事部',
-        key: '人事部',
-      },
-      {
-        title: '111',
-        key: '111',
-      },
-      {
-        title: '222',
-        key: '222',
-      },
-      {
-        title: '333',
-        key: '333',
-      },
-      {
-        title: '444',
-        key: '444',
-      },
-      {
-        title: '555',
-        key: '555',
-      },
-      {
-        title: '666',
-        key: '666',
-      },
-      {
-        title: '777',
-        key: '777',
-      },
-      {
-        title: '888',
-        key: '888',
-      },
-      {
-        title: '999',
-        key: '999',
-      },
-      {
-        title: '000',
-        key: '000',
-      },
-      {
-        title: '101',
-        key: '101',
-      },
-      {
-        title: '102',
-        key: '102',
-      },
-      {
-        title: '103',
-        key: '103',
-      },
-      {
-        title: '104',
-        key: '104',
-      },
+// let gData = [
+//   {
+//     title: '上海传慎',
+//     key: '上海传慎',
+//     children: [
+//       {
+//         title: '研发部',
+//         key: '研发部',
+//         children: [
+//           {
+//             title: '研发子部',
+//             key: '研发子部',
+//           },
+//         ],
+//       },
+//       {
+//         title: '后勤部',
+//         key: '后勤部',
+//       },
+//       {
+//         title: '人事部',
+//         key: '人事部',
+//       },
+//       {
+//         title: '111',
+//         key: '111',
+//       },
+//       {
+//         title: '222',
+//         key: '222',
+//       },
+//       {
+//         title: '333',
+//         key: '333',
+//       },
+//       {
+//         title: '444',
+//         key: '444',
+//       },
+//       {
+//         title: '555',
+//         key: '555',
+//       },
+//       {
+//         title: '666',
+//         key: '666',
+//       },
+//       {
+//         title: '777',
+//         key: '777',
+//       },
+//       {
+//         title: '888',
+//         key: '888',
+//       },
+//       {
+//         title: '999',
+//         key: '999',
+//       },
+//       {
+//         title: '000',
+//         key: '000',
+//       },
+//       {
+//         title: '101',
+//         key: '101',
+//       },
+//       {
+//         title: '102',
+//         key: '102',
+//       },
+//       {
+//         title: '103',
+//         key: '103',
+//       },
+//       {
+//         title: '104',
+//         key: '104',
+//       },
 
-      {
-        title: '105',
-        key: '105',
-      },
-      {
-        title: '106',
-        key: '106',
-      },
-      {
-        title: '107',
-        key: '107',
-      },
-      {
-        title: '108',
-        key: '108',
-      },
-      {
-        title: '109',
-        key: '109',
-      },
-      {
-        title: '110',
-        key: '110',
-      },
+//       {
+//         title: '105',
+//         key: '105',
+//       },
+//       {
+//         title: '106',
+//         key: '106',
+//       },
+//       {
+//         title: '107',
+//         key: '107',
+//       },
+//       {
+//         title: '108',
+//         key: '108',
+//       },
+//       {
+//         title: '109',
+//         key: '109',
+//       },
+//       {
+//         title: '110',
+//         key: '110',
+//       },
 
-      {
-        title: '201',
-        key: '201',
-      },
-      {
-        title: '202',
-        key: '202',
-      },
-      {
-        title: 'end',
-        key: 'end',
-      },
-    ],
-  },
-]
+//       {
+//         title: '201',
+//         key: '201',
+//       },
+//       {
+//         title: '202',
+//         key: '202',
+//       },
+//       {
+//         title: 'end',
+//         key: 'end',
+//       },
+//     ],
+//   },
+// ]
 
-const dataList: any = []
-const generateList = data => {
-  for (let i = 0; i < data.length; i++) {
-    const node = data[i]
-    const { key } = node
-    dataList.push({ key, title: key })
-    if (node.children) {
-      generateList(node.children)
-    }
-  }
-}
-generateList(gData)
-
-const getParentKey = (key, tree) => {
-  let parentKey
-  for (let i = 0; i < tree.length; i++) {
-    const node = tree[i]
-    if (node.children) {
-      if (node.children.some(item => item.key === key)) {
-        parentKey = node.key
-      } else if (getParentKey(key, node.children)) {
-        parentKey = getParentKey(key, node.children)
-      }
-    }
-  }
-  return parentKey
-}
+let gData = []
 
 export const FrameworkTree: React.FC = () => {
   const setState = useContext(appSetStateContext)
@@ -166,8 +141,22 @@ export const FrameworkTree: React.FC = () => {
   const [expandedKeys, setExpandedKeys] = useState(['上海传慎'])
   const [searchValue, setSearchValue] = useState('')
   const [autoExpandParent, setAutoExpandParent] = useState(true)
+  // const [treeData, setTreeData] = useState<any>([])
   // table自适应窗口大小高度
   let [tableHeight, setTableHeight] = useState<any>(560)
+
+  // useEffect(() => {
+  //   axios.get('depts/tree').then(res => {
+  //     const data = res.data
+  //     if (data.code === 0) {
+  //       console.log(data.data)
+  //       // setMemberData(data.data.list)
+  //       // setMemberTotalData(data.data.total_count)
+  //       gData = data.data
+  //       // generateList(gData)
+  //     }
+  //   })
+  // }, [])
 
   const changeResize = () => {
     setTableHeight(document.documentElement.clientHeight - 24 - 46 - 16 - 32)
@@ -175,6 +164,38 @@ export const FrameworkTree: React.FC = () => {
   useEffect(() => {
     window.addEventListener('resize', changeResize)
   })
+
+  // 占位
+  const dataList: any = []
+
+  const generateList = data => {
+    for (let i = 0; i < data.length; i++) {
+      const node = data[i]
+      const key = data[i].key
+      dataList.push({ key, title: key })
+      // console.log(node)
+      if (node.children) {
+        // console.log(node)
+        generateList(node.children)
+      }
+    }
+  }
+  generateList(gData)
+
+  const getParentKey = (key, tree) => {
+    let parentKey
+    for (let i = 0; i < tree.length; i++) {
+      const node = tree[i]
+      if (node.children) {
+        if (node.children.some(item => item.key === key)) {
+          parentKey = node.key
+        } else if (getParentKey(key, node.children)) {
+          parentKey = getParentKey(key, node.children)
+        }
+      }
+    }
+    return parentKey
+  }
 
   const onExpand = expandedKeys => {
     setExpandedKeys(expandedKeys)
@@ -197,7 +218,7 @@ export const FrameworkTree: React.FC = () => {
   }
 
   // 点击树节点触发
-  const onSelect = (selectedKeys: React.Key[], info: any) => {
+  const onSelect = (selectedKeys: any, info: any) => {
     // console.log(selectedKeys, info, history)
     if (setState) {
       setState(state => {
@@ -212,6 +233,9 @@ export const FrameworkTree: React.FC = () => {
 
   const loop = data =>
     data.map(item => {
+      console.log(item)
+      // console.log(item.title)
+
       const index = item.title.indexOf(searchValue)
       const beforeStr = item.title.substr(0, index)
       const afterStr = item.title.substr(index + searchValue.length)

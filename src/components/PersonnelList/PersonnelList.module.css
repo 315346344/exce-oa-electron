@@ -12,8 +12,8 @@
   overflow: auto;
 }
 
-:global(.PersonnelListClick){
-  background-color: #EFF0F1;
+:global(.PersonnelListClick) {
+  background-color: #eff0f1;
 }
 
 .list {

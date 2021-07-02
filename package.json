@@ -68,7 +68,7 @@
       "package.json",
       "main.js"
     ],
-    "extraResources":[
+    "extraResources": [
       "assets/*"
     ],
     "directories": {

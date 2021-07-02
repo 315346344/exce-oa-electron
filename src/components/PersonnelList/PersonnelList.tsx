@@ -2,141 +2,56 @@
  * 此组件为人员列表
  * 联系人页面的第二级选择列表
  */
-import React, { useRef, useContext } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './PersonnelList.module.css'
-import avatar from './../../assets/avatar2.png'
+// import avatar from './../../assets/avatar2.png'
+import axios from '../../http/http'
 
 import { appContext, appSetStateContext } from '../../AppState'
 
-const dataArr = [
-  {
-    name: '张三',
-    id: '01',
-  },
-  {
-    name: '李四',
-    id: '02',
-  },
-  {
-    name: '王五五',
-    id: '03',
-  },
-  {
-    name: '赵六',
-    id: '04',
-  },
-  {
-    name: '田七七',
-    id: '05',
-  },
-  {
-    name: '张三',
-    id: '06',
-  },
-  {
-    name: '王五五',
-    id: '07',
-  },
-  {
-    name: '田七七',
-    id: '08',
-  },
-  {
-    name: '赵六',
-    id: '09',
-  },
-  {
-    name: '田七七',
-    id: '010',
-  },
-  {
-    name: '张三',
-    id: '011',
-  },
-  {
-    name: '王五五',
-    id: '012',
-  },
-  {
-    name: '王五五',
-    id: '012',
-  },
-
-  {
-    name: '王五五',
-    id: '012',
-  },
-  {
-    name: '王五五',
-    id: '012',
-  },
-
-  {
-    name: '王五五',
-    id: '012',
-  },
-  {
-    name: '王五五',
-    id: '012',
-  },
-
-  {
-    name: '王五五',
-    id: '012',
-  },
-
-  {
-    name: '王五五',
-    id: '012',
-  },
-  {
-    name: '王五五',
-    id: '012',
-  },
-
-  {
-    name: '王五五',
-    id: '012',
-  },
-  {
-    name: '王五五',
-    id: '012',
-  },
-  {
-    name: '王五五',
-    id: '012',
-  },
-  {
-    name: '王五五',
-    id: '012',
-  },
-
-  {
-    name: '王五五',
-    id: '012',
-  },
-
-  {
-    name: '王五五',
-    id: '012',
-  },
-
-  {
-    name: '王五五',
-    id: '012',
-  },
-
-  {
-    name: 'end',
-    id: '012',
-  },
-]
-
 export const PersonnelList: React.FC = () => {
+  const [memberData, setMemberData] = useState<any>([])
+  const [memberTotalData, setMemberTotalData] = useState<any>([])
   const value = useContext(appContext)
   const history = useHistory()
   const itemEL = useRef<any>(null)
+
+  // useEffect(() => {
+  //   const access_token = window.sessionStorage.getItem('access_token')
+  //   const refresh_token = window.sessionStorage.getItem('refresh_token')
+
+  //   fetchData({
+  //     method: 'post',
+  //     url: '/users/refreshlogin',
+  //     params: { access_token, refresh_token },
+  //   })
+  // }, [])
+
+  // useEffect(() => {
+  //   if (response === null) return
+  //   console.log(response)
+  // }, [response])
+
+  useEffect(() => {
+    axios.get('users/addrbooks').then(res => {
+      const data = res.data
+      if (data.code === 0) {
+        setMemberData(data.data.list)
+        setMemberTotalData(data.data.total_count)
+      }
+    })
+
+    axios.get('depts/tree').then(res => {
+      const data = res.data
+      if (data.code === 0) {
+        console.log(data)
+
+        // setMemberData(data.data.list)
+        // setMemberTotalData(data.data.total_count)
+      }
+    })
+  }, [])
 
   const checkItem = (id, index) => {
     // 清除所有icon的选中样式
@@ -153,9 +68,9 @@ export const PersonnelList: React.FC = () => {
   }
   return (
     <div className={styles.box}>
-      <div className={styles.title}>部门成员（888人）</div>
+      <div className={styles.title}>部门成员（{memberTotalData}人）</div>
       <div className={styles.ul} ref={itemEL}>
-        {dataArr.map((item, index) => {
+        {memberData.map((item, index) => {
           if (index === 0) {
             return (
               <div
@@ -165,8 +80,22 @@ export const PersonnelList: React.FC = () => {
                   checkItem(item.id, index)
                 }}
               >
-                <img className={styles.avatar} src={avatar}></img>
-                <div className={styles.text}>{item.name}</div>
+                {/* <img className={styles.avatar} src={avatar}></img> */}
+                <div
+                  style={{
+                    width: '32px',
+                    height: '32px',
+                    lineHeight: '32px',
+                    textAlign: 'center',
+                    borderRadius: '50%',
+                    background: '#5B92FF',
+                    color: '#fff',
+                    margin: '10px 12px 0 15px',
+                  }}
+                >
+                  {item.real_name_initials}
+                </div>
+                <div className={styles.text}>{item.real_name}</div>
               </div>
             )
           } else {
@@ -178,8 +107,22 @@ export const PersonnelList: React.FC = () => {
                   checkItem(item.id, index)
                 }}
               >
-                <img className={styles.avatar} src={avatar}></img>
-                <div className={styles.text}>{item.name}</div>
+                {/* <img className={styles.avatar} src={avatar}></img> */}
+                <div
+                  style={{
+                    width: '32px',
+                    height: '32px',
+                    lineHeight: '32px',
+                    textAlign: 'center',
+                    borderRadius: '50%',
+                    background: '#5B92FF',
+                    color: '#fff',
+                    margin: '10px 12px 0 15px',
+                  }}
+                >
+                  {item.real_name_initials}
+                </div>
+                <div className={styles.text}>{item.real_name}</div>
               </div>
             )
           }

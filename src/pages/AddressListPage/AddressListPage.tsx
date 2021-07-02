@@ -38,9 +38,10 @@ export const AddressListPage: React.FC = props => {
       <div className={styles.right}>
         <Switch>
           <Route
-            path="/addressList/:personnelListId/:detailId"
+            path="/home/addressList/:personnelListId/:detailId"
             component={PersonnelDetail}
           />
+          <Redirect from="/home/addressList" to="/home/addressList/01/01" />
         </Switch>
       </div>
     </div>

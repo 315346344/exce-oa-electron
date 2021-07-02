@@ -98,7 +98,7 @@ export const ChatPage: React.FC = () => {
       <div className={styles.right}>
         <Switch>
           <Route path="/home/chat/:userId" component={Chat} />
-          <Redirect from="/home/chat" to="/chat/01" />
+          <Redirect from="/home/chat" to="/home/chat/01" />
         </Switch>
       </div>
     </div>
